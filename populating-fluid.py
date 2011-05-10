@@ -1,5 +1,6 @@
 ### @export "imports"
 import fluidinfo
+import json
 import os
 
 ### @export "fluid-login"
@@ -15,8 +16,23 @@ if not PASSWORD:
 fluidinfo.login(USERNAME, PASSWORD)
 
 headers, response = fluidinfo.call('GET', "/users/%s" % USERNAME)
-
-print headers
 print response
 
 
+### @export "create-named-object"
+headers, response = fluidinfo.call('POST', '/about/mybook')
+print "headers from creating named object:"
+print headers
+print "response from creating named object:"
+for k, v in response.items():
+    print k, ":", v
+
+### @export "create-anonymous-object"
+headers, response = fluidinfo.call('POST', '/objects/')
+print "headers from creating anonymous object:"
+print headers
+print "response from creating anonymous object:"
+for k, v in response.items():
+    print k, ":", v
+
+#http://www.archive.org/details/ste-531
