@@ -2,6 +2,7 @@
 import fluidinfo
 import json
 import os
+import urllib
 
 ### @export "fluid-login"
 USERNAME = os.environ["FLUID_USERNAME"]
@@ -20,7 +21,7 @@ print response
 
 
 ### @export "create-named-object"
-headers, response = fluidinfo.call('POST', '/about/mybook')
+headers, response = fluidinfo.call('POST', "/about/mybook")
 print "headers from creating named object:"
 print headers
 print "response from creating named object:"
