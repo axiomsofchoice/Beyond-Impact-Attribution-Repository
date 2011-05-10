@@ -18,3 +18,13 @@ Here is an anonymous object:
 {{ d['populating-fluid.py|idio|pycon|pyg']['create-anonymous-object'] }}
 
 However, for the goals of this project, the anonymous object makes more sense. While it is tempting to use DOIs as a name, this is problematic as you may not know a DOI when you are creating an object, and some formats of DOI are not suitable as fluidinfo names (even with url escaping). So it is more appropriate to use anonymous objects and set the DOI (if we have one) as a tag.
+
+## Namespace
+
+We want to create a project namespace, we will assume that the user ianmulvany is creating this:
+
+{{ d['populating-fluid.py|idio']['create-project-namespace'] }}
+
+After creating the namespace, we set permissions:
+
+{{ d['populating-fluid.py|idio']['set-namespace-permissions'] }}

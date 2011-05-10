@@ -29,11 +29,31 @@ for k, v in response.items():
     print k, ":", v
 
 ### @export "create-anonymous-object"
-headers, response = fluidinfo.call('POST', '/objects/')
+#headers, response = fluidinfo.call('POST', '/objects/')
 print "headers from creating anonymous object:"
 print headers
 print "response from creating anonymous object:"
 for k, v in response.items():
     print k, ":", v
 
-#http://www.archive.org/details/ste-531
+obj_id = response['id']
+print obj_id
+
+### @export "create-project-namespace"
+parent_namespace = '/namespaces/ianmulvany'
+namespace_info = {
+    'name': 'biar',
+    'description': 'beyond impact attribution registry namespace'
+}
+fluidinfo.call('POST', parent_namespace, namespace_info)
+
+### @export "set-namespace-permissions"
+permission_space = '/permissions/namespaces/ianmulvany/biar'
+permission_info = {
+    'policy': 'open',
+    'exceptions': []
+}
+fluidinfo.call('PUT', permission_space, permission_info, action="create")
+
+### @end
+
