@@ -28,7 +28,7 @@ for k, v in response.items():
     print k, ":", v
 
 ### @export "create-anonymous-object"
-#headers, response = fluidinfo.call('POST', '/objects/')
+headers, response = fluidinfo.call('POST', '/objects/')
 print "headers from creating anonymous object:"
 print headers
 print "response from creating anonymous object:"
