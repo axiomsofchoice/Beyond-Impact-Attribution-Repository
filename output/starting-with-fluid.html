@@ -67,8 +67,9 @@
 
 <p>This is a script to run our demo in fluid.</p>
 <div class="highlight"><pre><a name="l-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">fluidinfo</span>
-<a name="l-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
-<a name="l-3"></a><span class="gp">&gt;&gt;&gt; </span>
+<a name="l-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">json</span>
+<a name="l-3"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<a name="l-4"></a><span class="gp">&gt;&gt;&gt; </span>
 </pre></div>
 
 <p>We log in with a username/password from the env:</p>
@@ -85,12 +86,47 @@
 <a name="l-11"></a><span class="gp">&gt;&gt;&gt; </span>
 <a name="l-12"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">headers</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="n">fluidinfo</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="s">&quot;/users/</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">USERNAME</span><span class="p">)</span>
 <a name="l-13"></a><span class="gp">&gt;&gt;&gt; </span>
-<a name="l-14"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">headers</span>
-<a name="l-15"></a><span class="go">{&#39;status&#39;: &#39;200&#39;, &#39;content-length&#39;: &#39;68&#39;, &#39;content-location&#39;: &#39;https://fluiddb.fluidinfo.com/users/ananelson&#39;, &#39;server&#39;: &#39;nginx/0.7.65&#39;, &#39;connection&#39;: &#39;keep-alive&#39;, &#39;cache-control&#39;: &#39;no-cache&#39;, &#39;date&#39;: &#39;Tue, 10 May 2011 14:55:18 GMT&#39;, &#39;content-type&#39;: &#39;application/json&#39;}</span>
-<a name="l-16"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">response</span>
-<a name="l-17"></a><span class="go">{&#39;name&#39;: &#39;Ana Nelson&#39;, &#39;id&#39;: &#39;19de8e88-a494-45dc-bc50-bd51bf435263&#39;}</span>
-<a name="l-18"></a><span class="gp">&gt;&gt;&gt; </span>
+<a name="l-14"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;headers from user query:&quot;</span>
+<a name="l-15"></a><span class="go">headers from user query:</span>
+<a name="l-16"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">headers</span>
+<a name="l-17"></a><span class="go">{&#39;status&#39;: &#39;200&#39;, &#39;content-length&#39;: &#39;68&#39;, &#39;content-location&#39;: &#39;https://fluiddb.fluidinfo.com/users/ananelson&#39;, &#39;server&#39;: &#39;nginx/0.7.65&#39;, &#39;connection&#39;: &#39;keep-alive&#39;, &#39;cache-control&#39;: &#39;no-cache&#39;, &#39;date&#39;: &#39;Tue, 10 May 2011 15:41:07 GMT&#39;, &#39;content-type&#39;: &#39;application/json&#39;}</span>
+<a name="l-18"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;response from user query:&quot;</span>
+<a name="l-19"></a><span class="go">response from user query:</span>
+<a name="l-20"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">response</span>
+<a name="l-21"></a><span class="go">{&#39;name&#39;: &#39;Ana Nelson&#39;, &#39;id&#39;: &#39;19de8e88-a494-45dc-bc50-bd51bf435263&#39;}</span>
+<a name="l-22"></a><span class="gp">&gt;&gt;&gt; </span>
 </pre></div>
+
+<p>Now we will consider how to create bibliographic entries.</p>
+<p>In Fluid, you can create objects via a unique name, or you can create an unnamed objects. In either case, Fluid will return the identifier for the item. If you create an object by name and this name already exists, the existing identifier is returned.</p>
+<p>Here is a named object:
+<div class="highlight"><pre><a name="l-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">headers</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="n">fluidinfo</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;POST&#39;</span><span class="p">,</span> <span class="s">&#39;/about/mybook&#39;</span><span class="p">)</span>
+<a name="l-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;headers from creating named object:&quot;</span>
+<a name="l-3"></a><span class="go">headers from creating named object:</span>
+<a name="l-4"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">headers</span>
+<a name="l-5"></a><span class="go">{&#39;status&#39;: &#39;201&#39;, &#39;content-length&#39;: &#39;131&#39;, &#39;server&#39;: &#39;nginx/0.7.65&#39;, &#39;connection&#39;: &#39;keep-alive&#39;, &#39;location&#39;: &#39;https://fluiddb.fluidinfo.com/objects/9f02db51-4300-4868-91f7-100f746de682&#39;, &#39;cache-control&#39;: &#39;no-cache&#39;, &#39;date&#39;: &#39;Tue, 10 May 2011 15:41:08 GMT&#39;, &#39;content-type&#39;: &#39;application/json&#39;}</span>
+<a name="l-6"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;response from creating named object:&quot;</span>
+<a name="l-7"></a><span class="go">response from creating named object:</span>
+<a name="l-8"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">response</span>
+<a name="l-9"></a><span class="go">{&#39;id&#39;: &#39;9f02db51-4300-4868-91f7-100f746de682&#39;, &#39;URI&#39;: &#39;https://fluiddb.fluidinfo.com/objects/9f02db51-4300-4868-91f7-100f746de682&#39;}</span>
+<a name="l-10"></a><span class="gp">&gt;&gt;&gt; </span>
+</pre></div></p>
+<p>Here is an anonymous object:
+<div class="highlight"><pre><a name="l-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="c">#headers, response = fluidinfo.call(&#39;POST&#39;, &#39;/objects/&#39;)</span>
+<a name="l-2"></a><span class="gp">... </span><span class="k">print</span> <span class="s">&quot;headers from creating anonymous object:&quot;</span>
+<a name="l-3"></a><span class="go">headers from creating anonymous object:</span>
+<a name="l-4"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">headers</span>
+<a name="l-5"></a><span class="go">{&#39;status&#39;: &#39;201&#39;, &#39;content-length&#39;: &#39;131&#39;, &#39;server&#39;: &#39;nginx/0.7.65&#39;, &#39;connection&#39;: &#39;keep-alive&#39;, &#39;location&#39;: &#39;https://fluiddb.fluidinfo.com/objects/9f02db51-4300-4868-91f7-100f746de682&#39;, &#39;cache-control&#39;: &#39;no-cache&#39;, &#39;date&#39;: &#39;Tue, 10 May 2011 15:41:08 GMT&#39;, &#39;content-type&#39;: &#39;application/json&#39;}</span>
+<a name="l-6"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;response from creating anonymous object:&quot;</span>
+<a name="l-7"></a><span class="go">response from creating anonymous object:</span>
+<a name="l-8"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<a name="l-9"></a><span class="gp">... </span>    <span class="k">print</span> <span class="n">k</span><span class="p">,</span> <span class="s">&quot;:&quot;</span><span class="p">,</span> <span class="n">v</span>
+<a name="l-10"></a><span class="gp">... </span>
+<a name="l-11"></a><span class="go">id : 9f02db51-4300-4868-91f7-100f746de682</span>
+<a name="l-12"></a><span class="go">URI : https://fluiddb.fluidinfo.com/objects/9f02db51-4300-4868-91f7-100f746de682</span>
+<a name="l-13"></a><span class="gp">&gt;&gt;&gt; </span><span class="c">#http://www.archive.org/details/ste-531</span>
+<a name="l-14"></a><span class="gp">... </span>
+</pre></div></p>
   </body>
 </html>
 
