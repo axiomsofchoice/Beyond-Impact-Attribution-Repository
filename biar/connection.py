@@ -5,7 +5,20 @@ class Connection:
     def connect(klass, username, password):
         conn = klass()
         conn.username = username
-        fluidinfo.login(username, password)
+        
+        # Check that we can actually connect, e.g. network is not down
+        try:
+            fluidinfo.login(username, password)
+        except Exception as e:
+            print "Encountered a problem loggin in"
+            raise e
+
+        # Check to ensure that the login creditials were accepted
+        response = conn.user_info()
+        if type(response) is str:
+            errorMessage = "Log in failed for user %s, message: %s" % (conn.username, response)
+            raise Exception(errorMessage)
+        
         return conn
 
     def user_info(self):

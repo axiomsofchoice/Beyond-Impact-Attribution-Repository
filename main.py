@@ -5,6 +5,7 @@ import fluidinfo
 import json
 import os
 import urllib
+from biar.connection import Connection
 
 LIST_TAG = 'biar/collection'
 
@@ -26,6 +27,9 @@ def printAllLists():
     return 
 
 def logIn():
+    """Provides a session where a user logs in and 
+    """
+    
     print
     print "Welcome to Beyond Impact Attribute Repository (BIAR)."
     print
@@ -37,19 +41,12 @@ def logIn():
 
     if not password:
         raise Exception("Please supply a fluid account password")
+    conn = Connection.connect(username, password)
 
-    try:
-        fluidinfo.login(username, password)
-        headers, response = fluidinfo.call('GET', "/users/%s" % username)
-        if type(response) is str:
-            errorMessage = "Log in failed for user %s, message: %s" % (username, response)
-            raise Exception(errorMessage)
-        else:
-            print 
-            print "Welcome",response['name']
-            print
-    except Exception as e:
-        raise e	
+    print 
+    print "Welcome",conn.user_name()
+    print
+        
     return
 
 def getAndRunCommand():
