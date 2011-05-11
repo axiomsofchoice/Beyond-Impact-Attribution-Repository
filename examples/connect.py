@@ -1,4 +1,5 @@
 from biar.connection import Connection
+from biar.collection import Collection
 import os
 
 USERNAME = os.environ["FLUID_USERNAME"]
@@ -12,7 +13,13 @@ if not PASSWORD:
 
 conn = Connection.connect(USERNAME, PASSWORD)
 
+print conn.username
 print conn.user_info()
-print conn.user_name()
 print conn.user_id()
+
+
+mylist = Collection(conn, 'mylist')
+assert mylist.exists_in_fluid()
+
+
 
