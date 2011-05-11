@@ -13,11 +13,12 @@ class Work:
         """
         pass
     
-    def SetPersonalTag(self):
-        pass
+    def SetPersonalTag(self, tagname, tagvalue):
+        self.personaltags[tagname] = tagvalue
 
-    def SetCanonicalTag(self):
+    def SetCanonicalTag(self, tagname, tagvalue):
         pass
+        self.canonicaltags[tagname] = tagvalue
 
 class ListOfWorks:
     """The class encapsulated the collection of works that a user can put together for a certain purpose.
