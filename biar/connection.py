@@ -29,5 +29,8 @@ class Connection:
         headers, response = fluidinfo.call('GET', "/users/%s" % self.username)
         return response
 
+    def user_name(self):
+        return self.user_info()['name']
+
     def user_id(self):
         return self.user_info()['id']

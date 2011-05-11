@@ -1,7 +1,6 @@
 ### @export "imports"
 import sys
 import getpass
-import fluidinfo
 import json
 import os
 import urllib
@@ -10,6 +9,9 @@ from biar.connection import Connection
 LIST_TAG = 'biar/collection'
 
 def printListItems(list_name):
+    """Prints all the ids of the items in the list
+    """
+    
     LIST_TAG = 'biar/collection'
     headers, response = fluidinfo.call('GET', '/objects', query='%s matches "%s"' % (LIST_TAG, list_name))
     print response
@@ -18,6 +20,9 @@ def printListItems(list_name):
 
 
 def printAllLists():
+    """Prints all the available lists in the system
+    """
+    
     headers, response = fluidinfo.call('GET', '/objects', query='has %s' % LIST_TAG)
 
     for obj_id in response['ids']:
@@ -27,7 +32,7 @@ def printAllLists():
     return 
 
 def logIn():
-    """Provides a session where a user logs in and 
+    """Provides a session where a user logs in
     """
     
     print
@@ -50,6 +55,9 @@ def logIn():
     return
 
 def getAndRunCommand():
+    """Gets command from the user's commmand line and executes it.
+    """
+    
     full_cmd = raw_input("Choose command (lists, elements <listid>, exit): ").split()
     cmd = full_cmd[0]
     print
