@@ -1,0 +1,23 @@
+LIST OF CANONICAL TAGS
+
+'url'
+#CREATED 'title'
+'author'
+'keyword'
+#CREATED 'doi'
+'series'
+'is_video'
+'is_blog_post'
+'volume'
+'year'
+'name'
+'short-name'
+'grant_id'
+'wonga'
+
+LIST OF PERSONAL TAGS (to be created on personal namespaces)
+
+'publisher'
+'f1000'
+'f1000/rating'
+
