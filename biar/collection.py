@@ -9,6 +9,17 @@ class Collection:
     """The class encapsulated the collection of works that a user can put together for a certain purpose."""
     @classmethod
     def list_all(klass, connection):
+        # FIXME couldn't find a way of getting this to work.
+		# We need to match all objects based on <username>/biar/collections
+        # Tried to query on fluiddb path 'fluiddb/namespaces/path matches "ananelson/biar/collections"')
+        headers, response = fluidinfo.call('GET', '/objects', query='fluiddb/namespaces/path matches "svanderwaal/biar/videos/title"')
+        print headers
+        print response
+
+        for obj_id in response['ids']:
+            object_tag_path = "/objects/%s/%s" % (obj_id, LIST_TAG)
+            details_h, details_response = fluidinfo.call('GET', object_tag_path)
+            pp(details_response)
         pass
 
     def __init__(self, connection, name, description=None):
