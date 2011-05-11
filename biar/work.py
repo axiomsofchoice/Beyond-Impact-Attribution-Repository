@@ -14,22 +14,24 @@ class Work:
         return work
 
     def __init__(self, object_id):
+        """object_id is the fluiddb object id
+        """
         self.object_id = object_id
 
-    def set_public_attribute(self, name, value=None):
+    def SetCanonicalTag(self, name, value=None):
         # check if biar namespace exists
         # persist attribtue
         pass
 
-    def set_personal_attribute(self, name, value=None):
+    def SetPersonalTag(self, name, value=None):
         # check if personal namespace exists
         # persist attribute
         pass
 
-    def get_public_attribute(self, name):
+    def GetCanonicalTag(self, name):
         pass
 
-    def get_personal_attribute(self, name):
+    def GetPersonalTag(self, name):
         pass
 
     def set_title(self, title):
