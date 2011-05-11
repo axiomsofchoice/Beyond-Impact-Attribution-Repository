@@ -1,15 +1,17 @@
 import biar
 
-foo = Work()
+# Adding an example of a video, i.e. a canonical work
+foo1 = Work()
+foo1.SetCanonicalTag('url','http://www.youtube.com/watch?v=AaabJdRI3pE')
+foo1.SetCanonicalTag('title', 'FET11 Instant Communities tool')
+foo1.SetCanonicalTag('author', ['Marcos Baez', 'Lyubov Kolosovskaya'])
+foo1.SetPersonalTag('publisher','mbaezpy')
+foo1.SetCanonicalTag('is_video', 1)
 
-foo.SetCanonicalTag('url','http://www.youtube.com/watch?v=AaabJdRI3pE')
-foo.SetCanonicalTag('title', 'FET11 Instant Communities tool')
-foo.SetCanonicalTag('author', ['Marcos Baez', 'Lyubov Kolosovskaya'])
-foo.SetPersonalTag('publisher','mbaezpy')
-foo.SetCanonicalTag('is_video', 1)
-
-foo.SetCanonicalTag('url','http://www.fet11.eu/instantcommunities#/panel/332')
-foo.SetCanonicalTag('title', 'Science Café with Robert Madelin: What more should be done to empower Young Scientists in Europe?')
+# Adding an example of a webpage,
+foo2 = Work()
+foo2.SetCanonicalTag('url','http://www.fet11.eu/instantcommunities#/panel/332')
+foo2.SetCanonicalTag('title', 'Science Café with Robert Madelin: What more should be done to empower Young Scientists in Europe?')
 
 foo.SetCanonicalTag('url','http://beyond-impact.org/?p=35')
 foo.SetCanonicalTag('title', 'The personal impact dashboard')
