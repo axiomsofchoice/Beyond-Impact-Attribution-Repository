@@ -1,0 +1,19 @@
+LIST OF CANONICAL TAGS
+
+'url'
+#CREATED 'title'
+'author'
+'keyword'
+#CREATED 'doi'
+'series'
+'is_video'
+'is_blog_post'
+'volume'
+'year'
+'name'
+'short-name'
+
+LIST OF PERSONAL TAGS
+
+'publisher'
+
