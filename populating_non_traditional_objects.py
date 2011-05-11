@@ -14,7 +14,7 @@ videoWork.SetCanonicalTag('is_video', 1)
 # Adding an example of a webpage
 webpageWork = Work()
 webpageWork.SetCanonicalTag('url','http://www.fet11.eu/instantcommunities#/panel/332')
-webpageWork.SetCanonicalTag('title', 'Science Café with Robert Madelin: What more should be done to empower Young Scientists in Europe?')
+webpageWork.SetCanonicalTag('title', 'Science Cafe with Robert Madelin: What more should be done to empower Young Scientists in Europe?')
 
 # An example of a blog post
 blogpostWork = Work()
