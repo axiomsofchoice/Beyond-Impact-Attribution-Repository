@@ -69,8 +69,10 @@
 <div class="highlight"><pre><a name="l-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">fluidinfo</span>
 <a name="l-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">json</span>
 <a name="l-3"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
-<a name="l-4"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">urllib</span>
+<a name="l-4"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pprint</span>
 <a name="l-5"></a><span class="gp">&gt;&gt;&gt; </span>
+<a name="l-6"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span> <span class="o">=</span> <span class="n">pprint</span><span class="o">.</span><span class="n">PrettyPrinter</span><span class="p">(</span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<a name="l-7"></a><span class="gp">&gt;&gt;&gt; </span>
 </pre></div>
 
 <p>We log in with a username/password from the env:</p>
@@ -97,53 +99,198 @@
 <div class="highlight"><pre><a name="l-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">headers</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="n">fluidinfo</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;POST&#39;</span><span class="p">,</span> <span class="s">&quot;/about/mybook&quot;</span><span class="p">)</span>
 <a name="l-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;headers from creating named object:&quot;</span>
 <a name="l-3"></a><span class="go">headers from creating named object:</span>
-<a name="l-4"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">headers</span>
-<a name="l-5"></a><span class="go">{&#39;status&#39;: &#39;201&#39;, &#39;content-length&#39;: &#39;131&#39;, &#39;server&#39;: &#39;nginx/0.7.65&#39;, &#39;connection&#39;: &#39;keep-alive&#39;, &#39;location&#39;: &#39;https://fluiddb.fluidinfo.com/objects/9f02db51-4300-4868-91f7-100f746de682&#39;, &#39;cache-control&#39;: &#39;no-cache&#39;, &#39;date&#39;: &#39;Tue, 10 May 2011 16:16:20 GMT&#39;, &#39;content-type&#39;: &#39;application/json&#39;}</span>
-<a name="l-6"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;response from creating named object:&quot;</span>
-<a name="l-7"></a><span class="go">response from creating named object:</span>
-<a name="l-8"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<a name="l-9"></a><span class="gp">... </span>    <span class="k">print</span> <span class="n">k</span><span class="p">,</span> <span class="s">&quot;:&quot;</span><span class="p">,</span> <span class="n">v</span>
-<a name="l-10"></a><span class="gp">... </span>
-<a name="l-11"></a><span class="go">id : 9f02db51-4300-4868-91f7-100f746de682</span>
-<a name="l-12"></a><span class="go">URI : https://fluiddb.fluidinfo.com/objects/9f02db51-4300-4868-91f7-100f746de682</span>
+<a name="l-4"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+<a name="l-5"></a><span class="go">{   &#39;cache-control&#39;: &#39;no-cache&#39;,</span>
+<a name="l-6"></a><span class="go">    &#39;connection&#39;: &#39;keep-alive&#39;,</span>
+<a name="l-7"></a><span class="go">    &#39;content-length&#39;: &#39;131&#39;,</span>
+<a name="l-8"></a><span class="go">    &#39;content-type&#39;: &#39;application/json&#39;,</span>
+<a name="l-9"></a><span class="go">    &#39;date&#39;: &#39;Wed, 11 May 2011 13:05:46 GMT&#39;,</span>
+<a name="l-10"></a><span class="go">    &#39;location&#39;: &#39;https://fluiddb.fluidinfo.com/objects/9f02db51-4300-4868-91f7-100f746de682&#39;,</span>
+<a name="l-11"></a><span class="go">    &#39;server&#39;: &#39;nginx/0.7.65&#39;,</span>
+<a name="l-12"></a><span class="go">    &#39;status&#39;: &#39;201&#39;}</span>
+<a name="l-13"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;response from creating named object:&quot;</span>
+<a name="l-14"></a><span class="go">response from creating named object:</span>
+<a name="l-15"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<a name="l-16"></a><span class="go">{   &#39;URI&#39;: &#39;https://fluiddb.fluidinfo.com/objects/9f02db51-4300-4868-91f7-100f746de682&#39;,</span>
+<a name="l-17"></a><span class="go">    &#39;id&#39;: &#39;9f02db51-4300-4868-91f7-100f746de682&#39;}</span>
+<a name="l-18"></a><span class="gp">&gt;&gt;&gt; </span>
 </pre></div></p>
 <p>Here is an anonymous object:
-<div class="highlight"><pre><a name="l-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="c">#headers, response = fluidinfo.call(&#39;POST&#39;, &#39;/objects/&#39;)</span>
-<a name="l-2"></a><span class="gp">... </span><span class="k">print</span> <span class="s">&quot;headers from creating anonymous object:&quot;</span>
+<div class="highlight"><pre><a name="l-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">headers</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="n">fluidinfo</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;POST&#39;</span><span class="p">,</span> <span class="s">&#39;/objects/&#39;</span><span class="p">)</span>
+<a name="l-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;headers from creating anonymous object:&quot;</span>
 <a name="l-3"></a><span class="go">headers from creating anonymous object:</span>
-<a name="l-4"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">headers</span>
-<a name="l-5"></a><span class="go">{&#39;status&#39;: &#39;201&#39;, &#39;content-length&#39;: &#39;131&#39;, &#39;server&#39;: &#39;nginx/0.7.65&#39;, &#39;connection&#39;: &#39;keep-alive&#39;, &#39;location&#39;: &#39;https://fluiddb.fluidinfo.com/objects/9f02db51-4300-4868-91f7-100f746de682&#39;, &#39;cache-control&#39;: &#39;no-cache&#39;, &#39;date&#39;: &#39;Tue, 10 May 2011 16:16:20 GMT&#39;, &#39;content-type&#39;: &#39;application/json&#39;}</span>
-<a name="l-6"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;response from creating anonymous object:&quot;</span>
-<a name="l-7"></a><span class="go">response from creating anonymous object:</span>
-<a name="l-8"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<a name="l-9"></a><span class="gp">... </span>    <span class="k">print</span> <span class="n">k</span><span class="p">,</span> <span class="s">&quot;:&quot;</span><span class="p">,</span> <span class="n">v</span>
-<a name="l-10"></a><span class="gp">... </span>
-<a name="l-11"></a><span class="go">id : 9f02db51-4300-4868-91f7-100f746de682</span>
-<a name="l-12"></a><span class="go">URI : https://fluiddb.fluidinfo.com/objects/9f02db51-4300-4868-91f7-100f746de682</span>
-<a name="l-13"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">obj_id</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]</span>
-<a name="l-14"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">obj_id</span>
-<a name="l-15"></a><span class="go">9f02db51-4300-4868-91f7-100f746de682</span>
-<a name="l-16"></a><span class="gp">&gt;&gt;&gt; </span>
+<a name="l-4"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+<a name="l-5"></a><span class="go">{   &#39;cache-control&#39;: &#39;no-cache&#39;,</span>
+<a name="l-6"></a><span class="go">    &#39;connection&#39;: &#39;keep-alive&#39;,</span>
+<a name="l-7"></a><span class="go">    &#39;content-length&#39;: &#39;131&#39;,</span>
+<a name="l-8"></a><span class="go">    &#39;content-type&#39;: &#39;application/json&#39;,</span>
+<a name="l-9"></a><span class="go">    &#39;date&#39;: &#39;Wed, 11 May 2011 13:05:47 GMT&#39;,</span>
+<a name="l-10"></a><span class="go">    &#39;location&#39;: &#39;https://fluiddb.fluidinfo.com/objects/d0e53f85-dca4-4416-abe1-d28177562f83&#39;,</span>
+<a name="l-11"></a><span class="go">    &#39;server&#39;: &#39;nginx/0.7.65&#39;,</span>
+<a name="l-12"></a><span class="go">    &#39;status&#39;: &#39;201&#39;}</span>
+<a name="l-13"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;response from creating anonymous object:&quot;</span>
+<a name="l-14"></a><span class="go">response from creating anonymous object:</span>
+<a name="l-15"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<a name="l-16"></a><span class="go">{   &#39;URI&#39;: &#39;https://fluiddb.fluidinfo.com/objects/d0e53f85-dca4-4416-abe1-d28177562f83&#39;,</span>
+<a name="l-17"></a><span class="go">    &#39;id&#39;: &#39;d0e53f85-dca4-4416-abe1-d28177562f83&#39;}</span>
+<a name="l-18"></a><span class="gp">&gt;&gt;&gt; </span>
+<a name="l-19"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">obj_id</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]</span>
+<a name="l-20"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">obj_id</span>
+<a name="l-21"></a><span class="go">d0e53f85-dca4-4416-abe1-d28177562f83</span>
+<a name="l-22"></a><span class="gp">&gt;&gt;&gt; </span>
 </pre></div></p>
 <p>However, for the goals of this project, the anonymous object makes more sense. While it is tempting to use DOIs as a name, this is problematic as you may not know a DOI when you are creating an object, and some formats of DOI are not suitable as fluidinfo names (even with url escaping). So it is more appropriate to use anonymous objects and set the DOI (if we have one) as a tag.</p>
-<h2>Namespace</h2>
-<p>We want to create a project namespace, we will assume that the user ianmulvany is creating this:</p>
-<div class="highlight"><pre><a name="l-1"></a><span class="n">parent_namespace</span> <span class="o">=</span> <span class="s">&#39;/namespaces/ianmulvany&#39;</span>
-<a name="l-2"></a><span class="n">namespace_info</span> <span class="o">=</span> <span class="p">{</span>
-<a name="l-3"></a>    <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;biar&#39;</span><span class="p">,</span>
-<a name="l-4"></a>    <span class="s">&#39;description&#39;</span><span class="p">:</span> <span class="s">&#39;beyond impact attribution registry namespace&#39;</span>
-<a name="l-5"></a><span class="p">}</span>
-<a name="l-6"></a><span class="n">fluidinfo</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;POST&#39;</span><span class="p">,</span> <span class="n">parent_namespace</span><span class="p">,</span> <span class="n">namespace_info</span><span class="p">)</span>
+<h2>BIAR Namespace</h2>
+<p>All objects which are part of this project need to be tagged with the 'element' tag in the 'biar' namespace. </p>
+<div class="highlight"><pre><a name="l-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">parent_namespace</span> <span class="o">=</span> <span class="s">&#39;/namespaces/biar&#39;</span>
+<a name="l-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">headers</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="n">fluidinfo</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="n">parent_namespace</span><span class="p">)</span>
+<a name="l-3"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+<a name="l-4"></a><span class="go">{   &#39;cache-control&#39;: &#39;no-cache&#39;,</span>
+<a name="l-5"></a><span class="go">    &#39;connection&#39;: &#39;keep-alive&#39;,</span>
+<a name="l-6"></a><span class="go">    &#39;content-length&#39;: &#39;46&#39;,</span>
+<a name="l-7"></a><span class="go">    &#39;content-location&#39;: &#39;https://fluiddb.fluidinfo.com/namespaces/biar&#39;,</span>
+<a name="l-8"></a><span class="go">    &#39;content-type&#39;: &#39;application/json&#39;,</span>
+<a name="l-9"></a><span class="go">    &#39;date&#39;: &#39;Wed, 11 May 2011 13:05:50 GMT&#39;,</span>
+<a name="l-10"></a><span class="go">    &#39;server&#39;: &#39;nginx/0.7.65&#39;,</span>
+<a name="l-11"></a><span class="go">    &#39;status&#39;: &#39;200&#39;}</span>
+<a name="l-12"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<a name="l-13"></a><span class="go">{   &#39;id&#39;: &#39;ec2c89a7-6da1-4cb1-b90b-dd05e0146e7c&#39;}</span>
+<a name="l-14"></a><span class="gp">&gt;&gt;&gt; </span>
 </pre></div>
 
-<p>After creating the namespace, we set permissions:</p>
-<div class="highlight"><pre><a name="l-1"></a><span class="n">permission_space</span> <span class="o">=</span> <span class="s">&#39;/permissions/namespaces/ianmulvany/biar&#39;</span>
-<a name="l-2"></a><span class="n">permission_info</span> <span class="o">=</span> <span class="p">{</span>
-<a name="l-3"></a>    <span class="s">&#39;policy&#39;</span><span class="p">:</span> <span class="s">&#39;open&#39;</span><span class="p">,</span>
-<a name="l-4"></a>    <span class="s">&#39;exceptions&#39;</span><span class="p">:</span> <span class="p">[]</span>
-<a name="l-5"></a><span class="p">}</span>
-<a name="l-6"></a><span class="n">fluidinfo</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;PUT&#39;</span><span class="p">,</span> <span class="n">permission_space</span><span class="p">,</span> <span class="n">permission_info</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s">&quot;create&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><a name="l-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">headers</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="n">fluidinfo</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="s">&#39;/tags/biar/element&#39;</span><span class="p">)</span>
+<a name="l-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+<a name="l-3"></a><span class="go">{   &#39;cache-control&#39;: &#39;no-cache&#39;,</span>
+<a name="l-4"></a><span class="go">    &#39;connection&#39;: &#39;keep-alive&#39;,</span>
+<a name="l-5"></a><span class="go">    &#39;content-length&#39;: &#39;64&#39;,</span>
+<a name="l-6"></a><span class="go">    &#39;content-location&#39;: &#39;https://fluiddb.fluidinfo.com/tags/biar/element&#39;,</span>
+<a name="l-7"></a><span class="go">    &#39;content-type&#39;: &#39;application/json&#39;,</span>
+<a name="l-8"></a><span class="go">    &#39;date&#39;: &#39;Wed, 11 May 2011 13:05:53 GMT&#39;,</span>
+<a name="l-9"></a><span class="go">    &#39;server&#39;: &#39;nginx/0.7.65&#39;,</span>
+<a name="l-10"></a><span class="go">    &#39;status&#39;: &#39;200&#39;}</span>
+<a name="l-11"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<a name="l-12"></a><span class="go">{   &#39;id&#39;: &#39;46ca0f26-4702-46cc-80ef-6c2fbb086217&#39;, &#39;indexed&#39;: False}</span>
+<a name="l-13"></a><span class="gp">&gt;&gt;&gt; </span>
 </pre></div>
+
+<p>In this way we can search for all possible elements.</p>
+<div class="highlight"><pre><a name="l-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">headers</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="n">fluidinfo</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="s">&#39;/objects&#39;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="s">&#39;has biar/elemen t&#39;</span><span class="p">)</span>
+<a name="l-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+<a name="l-3"></a><span class="go">{   &#39;cache-control&#39;: &#39;no-cache&#39;,</span>
+<a name="l-4"></a><span class="go">    &#39;connection&#39;: &#39;keep-alive&#39;,</span>
+<a name="l-5"></a><span class="go">    &#39;content-length&#39;: &#39;369&#39;,</span>
+<a name="l-6"></a><span class="go">    &#39;content-location&#39;: &#39;https://fluiddb.fluidinfo.com/objects?query=has+biar%2Felement&#39;,</span>
+<a name="l-7"></a><span class="go">    &#39;content-type&#39;: &#39;application/json&#39;,</span>
+<a name="l-8"></a><span class="go">    &#39;date&#39;: &#39;Wed, 11 May 2011 13:05:54 GMT&#39;,</span>
+<a name="l-9"></a><span class="go">    &#39;server&#39;: &#39;nginx/0.7.65&#39;,</span>
+<a name="l-10"></a><span class="go">    &#39;status&#39;: &#39;200&#39;}</span>
+<a name="l-11"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<a name="l-12"></a><span class="go">{   &#39;ids&#39;: [   &#39;5922a640-25ec-4ac6-bbb9-35c164dd1e81&#39;,</span>
+<a name="l-13"></a><span class="go">               &#39;90400d9d-4029-4e92-b250-f3a43bbf5223&#39;,</span>
+<a name="l-14"></a><span class="go">               &#39;cf247aea-0f3a-4a15-bdc1-5b0ca3151b47&#39;,</span>
+<a name="l-15"></a><span class="go">               &#39;91459cc8-a803-4e1b-8a87-7712f99742c4&#39;,</span>
+<a name="l-16"></a><span class="go">               &#39;afd3a7b1-8c62-446c-9b74-b5602c8f76aa&#39;,</span>
+<a name="l-17"></a><span class="go">               &#39;99f95877-83e9-4401-b38b-bd997dcb2f52&#39;,</span>
+<a name="l-18"></a><span class="go">               &#39;90f26e32-b638-49ae-84cf-c6d38962d295&#39;,</span>
+<a name="l-19"></a><span class="go">               &#39;c79babbb-cc29-4109-9f21-e240a4f0923a&#39;,</span>
+<a name="l-20"></a><span class="go">               &#39;99946123-e20f-4911-8c12-f5c7a3e10820&#39;]}</span>
+<a name="l-21"></a><span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+
+<h2>Collection Namespace</h2>
+<p>Now we wish to create a collection to hold several objects.
+<div class="highlight"><pre><a name="l-1"></a><span class="n">list_parent_namespace</span> <span class="o">=</span> <span class="s">&#39;/namespaces/ananelson/biar/collections&#39;</span>
+<a name="l-2"></a><span class="n">namespace_info</span> <span class="o">=</span> <span class="p">{</span>
+<a name="l-3"></a>    <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;myfirstlist&#39;</span><span class="p">,</span>
+<a name="l-4"></a>    <span class="s">&#39;description&#39;</span><span class="p">:</span> <span class="s">&#39;my phd reading list&#39;</span>
+<a name="l-5"></a><span class="p">}</span>
+<a name="l-6"></a><span class="n">headers</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="n">fluidinfo</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;POST&#39;</span><span class="p">,</span> <span class="n">list_parent_namespace</span><span class="p">,</span> <span class="n">namespace_info</span><span class="p">)</span>
+<a name="l-7"></a><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+<a name="l-8"></a><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<a name="l-9"></a>
+<a name="l-10"></a><span class="n">list_parent_namespace</span> <span class="o">=</span> <span class="s">&#39;/namespaces/ananelson/biar/collections&#39;</span>
+<a name="l-11"></a><span class="n">namespace_info</span> <span class="o">=</span> <span class="p">{</span>
+<a name="l-12"></a>    <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;mysecondlist&#39;</span><span class="p">,</span>
+<a name="l-13"></a>    <span class="s">&#39;description&#39;</span><span class="p">:</span> <span class="s">&#39;bedtime reading list&#39;</span>
+<a name="l-14"></a><span class="p">}</span>
+<a name="l-15"></a><span class="n">headers</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="n">fluidinfo</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;POST&#39;</span><span class="p">,</span> <span class="n">list_parent_namespace</span><span class="p">,</span> <span class="n">namespace_info</span><span class="p">)</span>
+<a name="l-16"></a><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+<a name="l-17"></a><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div></p>
+<p>Note that the parent namespaces need to be created first.
+<div class="highlight"><pre><a name="l-1"></a><span class="n">list_parent_namespace</span> <span class="o">=</span> <span class="s">&#39;/namespaces&#39;</span>
+<a name="l-2"></a><span class="n">namespace_info</span> <span class="o">=</span> <span class="p">{</span>
+<a name="l-3"></a>    <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;ananelson&#39;</span><span class="p">,</span>
+<a name="l-4"></a>    <span class="s">&#39;description&#39;</span><span class="p">:</span> <span class="s">&#39;personal namespace&#39;</span>
+<a name="l-5"></a><span class="p">}</span>
+<a name="l-6"></a><span class="n">headers</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="n">fluidinfo</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;POST&#39;</span><span class="p">,</span> <span class="n">list_parent_namespace</span><span class="p">,</span> <span class="n">namespace_info</span><span class="p">)</span>
+<a name="l-7"></a>
+<a name="l-8"></a><span class="n">list_parent_namespace</span> <span class="o">=</span> <span class="s">&#39;/namespaces/ananelson&#39;</span>
+<a name="l-9"></a><span class="n">namespace_info</span> <span class="o">=</span> <span class="p">{</span>
+<a name="l-10"></a>    <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;biar&#39;</span><span class="p">,</span>
+<a name="l-11"></a>    <span class="s">&#39;description&#39;</span><span class="p">:</span> <span class="s">&#39;place to put biar stuff&#39;</span>
+<a name="l-12"></a><span class="p">}</span>
+<a name="l-13"></a><span class="n">headers</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="n">fluidinfo</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;POST&#39;</span><span class="p">,</span> <span class="n">list_parent_namespace</span><span class="p">,</span> <span class="n">namespace_info</span><span class="p">)</span>
+<a name="l-14"></a>
+<a name="l-15"></a><span class="n">list_parent_namespace</span> <span class="o">=</span> <span class="s">&#39;/namespaces/ananelson/biar&#39;</span>
+<a name="l-16"></a><span class="n">namespace_info</span> <span class="o">=</span> <span class="p">{</span>
+<a name="l-17"></a>    <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;collections&#39;</span><span class="p">,</span>
+<a name="l-18"></a>    <span class="s">&#39;description&#39;</span><span class="p">:</span> <span class="s">&#39;biar collections&#39;</span>
+<a name="l-19"></a><span class="p">}</span>
+<a name="l-20"></a><span class="n">headers</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="n">fluidinfo</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;POST&#39;</span><span class="p">,</span> <span class="n">list_parent_namespace</span><span class="p">,</span> <span class="n">namespace_info</span><span class="p">)</span>
+</pre></div></p>
+<p>We will use the 'element' tag to indicate that an object is a member of a collection. We need to define this tag in each namespace, which means we need to define this tag for every collection.
+<div class="highlight"><pre><a name="l-1"></a><span class="n">tag_info</span> <span class="o">=</span> <span class="p">{</span>
+<a name="l-2"></a>    <span class="s">&#39;name&#39;</span> <span class="p">:</span> <span class="s">&#39;element&#39;</span><span class="p">,</span>
+<a name="l-3"></a>    <span class="s">&#39;description&#39;</span> <span class="p">:</span> <span class="s">&#39;Tag indicating that object is part of a list&#39;</span><span class="p">,</span>
+<a name="l-4"></a>    <span class="s">&#39;indexed&#39;</span> <span class="p">:</span> <span class="bp">False</span>
+<a name="l-5"></a><span class="p">}</span>
+<a name="l-6"></a><span class="n">user_biar_namespace</span> <span class="o">=</span> <span class="s">&#39;/tags/ananelson/biar/collections/myfirstlist&#39;</span>
+<a name="l-7"></a><span class="n">headers</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="n">fluidinfo</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;POST&#39;</span><span class="p">,</span> <span class="n">user_biar_namespace</span><span class="p">,</span> <span class="n">tag_info</span><span class="p">)</span>
+<a name="l-8"></a><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+<a name="l-9"></a><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<a name="l-10"></a>
+<a name="l-11"></a><span class="n">user_biar_namespace</span> <span class="o">=</span> <span class="s">&#39;/tags/ananelson/biar/collections/mysecondlist&#39;</span>
+<a name="l-12"></a><span class="n">headers</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="n">fluidinfo</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;POST&#39;</span><span class="p">,</span> <span class="n">user_biar_namespace</span><span class="p">,</span> <span class="n">tag_info</span><span class="p">)</span>
+<a name="l-13"></a><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+<a name="l-14"></a><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div></p>
+<p>Now we can assign objects to lists by setting the element tag:
+<div class="highlight"><pre><a name="l-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">object_tag_path</span> <span class="o">=</span> <span class="s">&quot;/objects/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">obj_id</span><span class="p">,</span> <span class="s">&#39;ananelson/biar/collections /myfirstlist&#39;</span><span class="p">,</span> <span class="s">&#39;element&#39;</span><span class="p">)</span>
+<a name="l-2"></a><span class="gp">&gt;&gt;&gt; </span>
+<a name="l-3"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">headers</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="n">fluidinfo</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;PUT&#39;</span><span class="p">,</span> <span class="n">object_tag_path</span><span class="p">)</span>
+<a name="l-4"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+<a name="l-5"></a><span class="go">{   &#39;cache-control&#39;: &#39;no-cache&#39;,</span>
+<a name="l-6"></a><span class="go">    &#39;connection&#39;: &#39;keep-alive&#39;,</span>
+<a name="l-7"></a><span class="go">    &#39;content-type&#39;: &#39;text/html&#39;,</span>
+<a name="l-8"></a><span class="go">    &#39;date&#39;: &#39;Wed, 11 May 2011 13:06:10 GMT&#39;,</span>
+<a name="l-9"></a><span class="go">    &#39;server&#39;: &#39;nginx/0.7.65&#39;,</span>
+<a name="l-10"></a><span class="go">    &#39;status&#39;: &#39;204&#39;}</span>
+<a name="l-11"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<a name="l-12"></a><span class="go">&#39;&#39;</span>
+<a name="l-13"></a><span class="gp">&gt;&gt;&gt; </span>
+</pre></div></p>
+<p>And we can query membership in a list:
+<div class="highlight"><pre><a name="l-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">headers</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="n">fluidinfo</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="s">&#39;/objects&#39;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="s">&#39;has ananelson/b iar/collections/myfirstlist/element&#39;</span><span class="p">)</span>
+<a name="l-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+<a name="l-3"></a><span class="go">{   &#39;cache-control&#39;: &#39;no-cache&#39;,</span>
+<a name="l-4"></a><span class="go">    &#39;connection&#39;: &#39;keep-alive&#39;,</span>
+<a name="l-5"></a><span class="go">    &#39;content-length&#39;: &#39;289&#39;,</span>
+<a name="l-6"></a><span class="go">    &#39;content-location&#39;: &#39;https://fluiddb.fluidinfo.com/objects?query=has+ananelson%2Fbiar%2Fcollections%2Fmyfirstlist%2Felement&#39;,</span>
+<a name="l-7"></a><span class="go">    &#39;content-type&#39;: &#39;application/json&#39;,</span>
+<a name="l-8"></a><span class="go">    &#39;date&#39;: &#39;Wed, 11 May 2011 13:06:11 GMT&#39;,</span>
+<a name="l-9"></a><span class="go">    &#39;server&#39;: &#39;nginx/0.7.65&#39;,</span>
+<a name="l-10"></a><span class="go">    &#39;status&#39;: &#39;200&#39;}</span>
+<a name="l-11"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<a name="l-12"></a><span class="go">{   &#39;ids&#39;: [   &#39;8876ede8-c7c7-4c4a-9285-257b1f911298&#39;,</span>
+<a name="l-13"></a><span class="go">               &#39;c6177e88-df54-4505-9e20-d4fd6ca12588&#39;,</span>
+<a name="l-14"></a><span class="go">               &#39;e2036dd7-444f-42a4-9b66-ec5583c40fed&#39;,</span>
+<a name="l-15"></a><span class="go">               &#39;cf247aea-0f3a-4a15-bdc1-5b0ca3151b47&#39;,</span>
+<a name="l-16"></a><span class="go">               &#39;c37917bb-0509-49f7-acc2-e5bbdd4c6544&#39;,</span>
+<a name="l-17"></a><span class="go">               &#39;1a18a0ce-3224-4706-9c9a-0df614ff338e&#39;,</span>
+<a name="l-18"></a><span class="go">               &#39;d0e53f85-dca4-4416-abe1-d28177562f83&#39;]}</span>
+<a name="l-19"></a><span class="gp">&gt;&gt;&gt; </span>
+</pre></div></p>
   </body>
 </html>
 
