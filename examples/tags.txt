@@ -12,8 +12,12 @@ LIST OF CANONICAL TAGS
 'year'
 'name'
 'short-name'
+'grant_id'
+'wonga'
 
-LIST OF PERSONAL TAGS
+LIST OF PERSONAL TAGS (to be created on personal namespaces)
 
 'publisher'
+'f1000'
+'f1000/rating'
 
