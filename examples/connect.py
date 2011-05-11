@@ -27,3 +27,8 @@ print "Created new work", work.object_id
 mylist.add_work(work)
 print mylist.list_works()
 
+work.set_canonical_tag('title', "Abc")
+print work.get_canonical_tag('title')
+work.set_personal_tag('title', "Def")
+print work.get_personal_tag('title')
+print work.title()
