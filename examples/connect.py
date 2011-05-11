@@ -19,11 +19,11 @@ print conn.user_info()
 print conn.user_id()
 
 
-mylist = Collection(conn, 'mylist2')
+mylist = Collection(conn, 'mylistx1')
 assert mylist.exists_in_fluid()
 
 work = Work.create(conn)
 print "Created new work", work.object_id
 mylist.add_work(work)
-mylist.list_works()
+print mylist.list_works()
 
