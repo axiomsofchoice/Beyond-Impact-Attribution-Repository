@@ -2,29 +2,29 @@
 
 
 class Work:
-    def createNew:
+    def createNew():
         pass
     
-    def SetPersonalTag:
+    def SetPersonalTag():
         pass
 
-    def SetCanonicalTag:
+    def SetCanonicalTag():
         pass
 
 class List:
 
-    def createNew:
+    def createNew():
         pass
     
-    def AddWork:
+    def AddWork():
         pass
 
 class ListMembership:
 
-    def SetPersonalTag:
+    def SetPersonalTag():
         pass
 
-    def SetCanonicalTag:
+    def SetCanonicalTag():
         pass
 
 
