@@ -25,7 +25,7 @@ taglist=['author', 'keyword','series'
 'is_blog_post',
 'volume',
 'year',
-'name',
+'name', 'pmid',
 'short-name','grant_id',
 'wonga']
 
