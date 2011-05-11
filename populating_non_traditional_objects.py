@@ -48,3 +48,12 @@ lic.SetCanonicalTag('name', 'LECTURE NOTES OF THE INSTITUTE FOR COMPUTER SCIENCE
 lic.SetCanonicalTag('short-name', 'LNICST');
 lic.addWork(book1Work);
 lic.addWork(book2Work);
+
+# A list of books in the same series
+list2 = List()
+list2.SetCanonicalTag('name', 'All Objects Created by Hand')
+list2.addWork(videoWork);
+list2.addWork(webpageWork);
+list2.addWork(blogpostWork);
+list2.addWork(book1Work);
+list2.addWork(book2Work);
