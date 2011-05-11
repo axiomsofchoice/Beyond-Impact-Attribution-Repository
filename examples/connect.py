@@ -31,4 +31,4 @@ work.set_canonical_tag('title', "Abc")
 print work.get_canonical_tag('title')
 work.set_personal_tag('title', "Def")
 print work.get_personal_tag('title')
-
+print work.title()

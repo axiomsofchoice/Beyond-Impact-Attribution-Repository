@@ -28,8 +28,6 @@ class Work:
 
         tag_path = "/objects/%s/%s/%s" % (self.object_id, 'biar', name)
         headers, response = fluidinfo.call('PUT', tag_path, value)
-        print headers
-        print response
 
 
     def set_personal_tag(self, name, value=None):
@@ -45,28 +43,24 @@ class Work:
         tag_path = "/objects/%s/%s/biar/%s" % (self.object_id,
                                                self.connection.username, name)
         headers, response = fluidinfo.call('PUT', tag_path, value)
-        print headers
-        print response
 
 
     def get_canonical_tag(self, name):
         namespace = "/namespaces/biar"
         tag_path = "/objects/%s/biar/%s" % (self.object_id,name)
         headers, response = fluidinfo.call('GET', tag_path)
-        print headers
-        print response
+        return response
 
     def get_personal_tag(self, name):
         namespace = "/namespaces/%s/biar" % self.connection.username
         tag_path = "/objects/%s/%s/biar/%s" % (self.object_id,
                                                self.connection.username, name)
         headers, response = fluidinfo.call('GET', tag_path)
-        print headers
-        print response
+        return response
 
     def set_title(self, title):
-        self.set_canonical_tag(self, 'title', title)
+        self.set_canonical_tag('title', title)
 
     def title(self):
-        self.get_canonical_tag(self, 'title')
+        return self.get_canonical_tag('title')
 
