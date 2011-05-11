@@ -11,7 +11,7 @@ class Connection:
         try:
             fluidinfo.login(username, password)
         except Exception as e:
-            print "Encountered a problem loggin in"
+            print "Encountered a problem logging in"
             raise e
 
         # Check to ensure that the login creditials were accepted

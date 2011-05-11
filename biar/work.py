@@ -1,3 +1,5 @@
+import fluidinfo
+
 class Work:
     """
     Possible examples of works include traditional works such as papers and non traditional works such videos.
@@ -7,10 +9,12 @@ class Work:
     def create(klass, connection):
         """Create a new, blank work."""
         headers, response = fluidinfo.call('POST', '/objects/')
-        work = klass()
-        work.obj_id = response['id']
+        work = klass(response['id'])
         work.connection = connection
         return work
+
+    def __init__(self, object_id):
+        self.object_id = object_id
 
     def set_public_attribute(self, name, value=None):
         # check if biar namespace exists
@@ -28,7 +32,7 @@ class Work:
     def get_personal_attribute(self, name):
         pass
 
-    def title=(self, title):
+    def set_title(self, title):
         self.set_public_attribute(self, 'title', title)
 
     def title(self):

@@ -1,5 +1,6 @@
 from biar.connection import Connection
 from biar.collection import Collection
+from biar.work import Work
 import os
 
 USERNAME = os.environ["FLUID_USERNAME"]
@@ -18,8 +19,11 @@ print conn.user_info()
 print conn.user_id()
 
 
-mylist = Collection(conn, 'mylist')
+mylist = Collection(conn, 'mylist2')
 assert mylist.exists_in_fluid()
 
-
+work = Work.create(conn)
+print "Created new work", work.object_id
+mylist.add_work(work)
+mylist.list_works()
 

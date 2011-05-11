@@ -44,8 +44,18 @@ class Collection:
         headers, response = fluidinfo.call('POST', self.collection_namespace(), tag_info)
         # TODO check headers
 
-    def add_work(self, object_id):
-        pass
+    def add_work(self, work):
+        tag_path = "/objects/%s/%s/%s" % (work.object_id, self.collection_namespace(), 'element')
+        headers, response = fluidinfo.call('PUT', tag_path)
+        print headers
+        print response
+
+    def list_works(self):
+        querystring = "has %s/biar/collections/%s/element" % (self.connection.username, self.name)
+        headers, response = fluidinfo.call('GET', '/objects', query=querystring)
+        print headers
+        print response
+        return response
 
     def parent_namespace(self):
         return "/namespaces/%s/biar/collections" % (self.connection.username)
