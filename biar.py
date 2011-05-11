@@ -1,17 +1,30 @@
 
 
 
-Work
-- New
-- SetPersonalTag
-- SetCanonicalTag
+class Work:
+    def createNew:
+        pass
+    
+    def SetPersonalTag:
+        pass
 
-List
-- New
-- AddWork
+    def SetCanonicalTag:
+        pass
 
-ListMembership
-- SetPersonalTag
-- SetCanonicalTag
+class List:
+
+    def createNew:
+        pass
+    
+    def AddWork:
+        pass
+
+class ListMembership:
+
+    def SetPersonalTag:
+        pass
+
+    def SetCanonicalTag:
+        pass
 
 
