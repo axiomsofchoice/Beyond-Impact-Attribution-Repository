@@ -1,7 +1,7 @@
 """A set of example of works and the tags/metadata that might typically be provided in some basic use cases.
 """
 
-import biar
+from biar.work import Work
 
 # Adding an example of a video, i.e. a canonical work
 videoWork = Work()
