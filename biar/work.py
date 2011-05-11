@@ -37,7 +37,7 @@ class Work:
         if not headers['status'] == '200':
             raise Exception("namespace %s does not exist" % namespace)
         if not name in response['tagNames']:
-            raise Exception("tag %s not found in namespace" % (name,
+            raise Exception("tag %s not found in namespace %s" % (name,
                                                                namespace))
 
         tag_path = "/objects/%s/%s/biar/%s" % (self.object_id,
