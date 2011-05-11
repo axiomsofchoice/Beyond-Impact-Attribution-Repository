@@ -2,6 +2,10 @@ import BeautifulSoup
 from BeautifulSoup import BeautifulStoneSoup
 import urllib2
 
+"""
+this script parses a custom xml from faculty of 1000 and gets some records from that file
+"""
+
 def doi2pmid(doi):
     url = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?term=%s&email=ian.mulvany@gmail.com" % doi
     xml = urllib2.urlopen(url)
