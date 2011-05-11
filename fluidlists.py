@@ -47,7 +47,9 @@ print "%s\n%s" % fluidinfo.call('POST', namespace, tag_info)
 
 # put a list (first example is an opaque JSON version and the second is the primitive set of string)
 #print "%s\n%s" % fluidinfo.call('PUT', '/about/%s/axiomsofchoice/biar/listofcats' % cheezburgerId, json.dumps([1,2]), mime="application/json")
-print "%s\n%s" % fluidinfo.call('PUT', '/about/%s/axiomsofchoice/biar/listofcats' % cheezburgerId, ['1','2'])
+#print "%s\n%s" % fluidinfo.call('PUT', '/about/%s/axiomsofchoice/biar/listofcats' % cheezburgerId, ['1','2'])
 
 # Get an example of a list of things
-print "%s\n%s" % fluidinfo.call('GET', '/objects/331b8880-b5b6-4f26-8a3a-2e33a90e5c5b/oreilly.com/authors/works', showAbout=True)
+k,v = fluidinfo.call('GET', '/objects/331b8880-b5b6-4f26-8a3a-2e33a90e5c5b/oreilly.com/authors/works', showAbout=True)
+
+print v
